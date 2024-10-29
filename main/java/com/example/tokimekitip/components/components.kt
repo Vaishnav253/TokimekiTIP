@@ -1,0 +1,55 @@
+package com.example.tokimekitip.components
+
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text2.input.TextFieldLineLimits
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CurrencyRupee
+import androidx.compose.material.icons.rounded.AttachMoney
+import androidx.compose.material.icons.rounded.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun InputField(
+    modifier: Modifier = Modifier,
+    valueState: MutableState<String>,
+    labelId: String,
+    enabled: Boolean,
+    isSingleLine: Boolean,
+    keyBoardType: KeyboardType = KeyboardType.Number,
+    imeAction: ImeAction = ImeAction.Next,
+    onAction: KeyboardActions = KeyboardActions.Default
+) {
+    OutlinedTextField(value = valueState.value,
+        onValueChange = {valueState.value = it},
+        label = { Text(text = labelId)},
+        /*leadingIcon = { Icon(imageVector = Icons.Rounded.AttachMoney,
+            contentDescription = "Money Icon")}*/
+        leadingIcon = { Icon(imageVector = Icons.Filled.CurrencyRupee,
+            contentDescription = "Rupee Symbol")},
+        singleLine = isSingleLine,
+        textStyle = TextStyle(fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground),
+        modifier = modifier
+            .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
+            .fillMaxWidth(),
+        enabled = enabled,
+        keyboardOptions = KeyboardOptions(keyboardType = keyBoardType,
+            imeAction = imeAction),
+        keyboardActions = onAction)
+}
